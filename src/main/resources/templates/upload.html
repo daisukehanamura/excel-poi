@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#uploadButton').on('click', function(event) {
+				
+                var $file = $('#uploadSelectFileBox');
+
+                // FormData オブジェクトを作成
+                var formData = new FormData();
+                formData.append('upload_file', $file.prop("files")[0]);
+
+                // Ajaxで送信
+                $.ajax({
+                    // アップロードを処理するAPIへのURL
+                    url: 'upload',
+                    // HTTPメソッド
+                    method: 'post',
+                    // レスポンスの形式
+                    dataType: 'json',
+                    // dataに FormDataを指定
+                    data: formData,
+                    // dataの変換をさせない
+                    processData: false,
+                    // contentTypeをfalseにすることで適切なContentTypeを指定してくれる
+                    contentType: false
+                }).done(function(data, textStatus) {
+                    // 送信成功
+
+                    // Jsonが返ってきたら以下のようにパースできる
+                    var data_stringify = JSON.stringify(data);
+                    var data_json = JSON.parse(data_stringify);
+
+                    // Jsonへのアクセスも簡単にできます
+                    console.log(data_json.message);
+
+                }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+                    // 失敗時の処理（エラーメッセージなど）
+                    console.log(textStatus);
+                });
+
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="file" name="file" id="uploadSelectFileBox" accept=".xlsx"/>
+    <input type="button" id="uploadButton" value="アップロード" />
+</body>
+</html>
