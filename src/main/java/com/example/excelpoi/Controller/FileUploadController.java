@@ -1,10 +1,7 @@
 package com.example.excelpoi.Controller;
 
-import java.util.Date;
+import java.util.List;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,39 +50,9 @@ public class FileUploadController {
 
 		// Excelシート読み込み
 		Sheet sheet = excelFileReader.readExcel(multipartFile,"SheetName");
-
-		// 1行目取得
-		Row row = sheet.getRow(0);
-
-		// データがある最後のセル番号取得
-		final int cellNum = row.getLastCellNum();
-		// セル分ループ
-		for (int cellIndex = 0; cellIndex < cellNum; ++cellIndex) {
-			// セル取得
-			Cell cell = row.getCell(cellIndex);
-
-			// セルの値取得
-			switch (cell.getCellType()) {
-				case STRING:
-					String stringVal = cell.getStringCellValue();
-					// 文字列データの処理
-					break;
-				case NUMERIC:
-					if (DateUtil.isCellDateFormatted(cell)) {
-						Date dateVal = cell.getDateCellValue();
-						// 日付データの処理
-					} else {
-						double numVal = cell.getNumericCellValue();
-						// 数値データの処理
-					}
-					break;
-				default:
-					// その他のデータタイプに対する処理
-					break;
-			}
-
-			// 必要に応じた処理
-		}
+		List<Object> object = excelFileReader.readFromXml(
+			sheet, "C:\\Users\\PC\\git\\excel-poi\\excel-poi\\XML\\sample.xml", null);
+		System.out.println(object);
 
 		response.message = "正常に完了しました";
 		return response;

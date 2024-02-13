@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions>
+  <definition name="user">
+    <column name="name" type="string"/>
+    <column name="email" type="email"/>
+    <column name="age" type="integer"/>
+  </definition>
+  <definition name="product">
+    <column name="name" type="string"/>
+    <column name="price" type="double"/>
+    <column name="category" type="string"/>
+  </definition>
+</definitions>

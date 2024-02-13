@@ -27,7 +27,7 @@ public class ExcelFileReader {
     /*
      * Excelファイルのシートを読み込む処理
      */
-    public static Sheet readExcel(MultipartFile multipartFile, String sheetName)
+    public Sheet readExcel(MultipartFile multipartFile, String sheetName)
             throws IOException {
 
         // バイナリを取得する
@@ -45,7 +45,7 @@ public class ExcelFileReader {
     /*
      * Excelファイルをエンティティに置き換え
      */
-    public static <T> List<Object> readFromXml(Sheet sheet, String xmlFile, Class<T> clazz)
+    public <T> List<Object> readFromXml(Sheet sheet, String xmlFile, Class<T> clazz)
             throws IOException, SAXException, ParserConfigurationException, InstantiationException, 
             IllegalAccessException, IllegalArgumentException, InvocationTargetException, 
             NoSuchMethodException, SecurityException {
