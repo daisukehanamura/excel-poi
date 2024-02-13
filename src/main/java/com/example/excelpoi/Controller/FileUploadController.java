@@ -49,9 +49,10 @@ public class FileUploadController {
 		}
 
 		// Excelシート読み込み
-		Sheet sheet = excelFileReader.readExcel(multipartFile,"SheetName");
+		Sheet sheet = excelFileReader.readExcel(multipartFile,"Sheet1");
+		Class<?> clazz = Class.forName("com.example.excelpoi.Entity.Sample");
 		List<Object> object = excelFileReader.readFromXml(
-			sheet, "C:\\Users\\PC\\git\\excel-poi\\excel-poi\\XML\\sample.xml", null);
+			sheet, "C:\\Users\\PC\\git\\excel-poi\\excel-poi\\XML\\sample.xml", clazz);
 		System.out.println(object);
 
 		response.message = "正常に完了しました";

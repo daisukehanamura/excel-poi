@@ -16,12 +16,14 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+@Service
 public class ExcelFileReader {
 
     /*
@@ -54,7 +56,7 @@ public class ExcelFileReader {
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(xmlFile);
-        NodeList nodes = doc.getElementsByTagName("property");
+        NodeList nodes = doc.getElementsByTagName("definitions");
 
         // 定義体に基づいてエンティティリストを作成
         List<Object> entities = new ArrayList<>();
@@ -71,7 +73,7 @@ public class ExcelFileReader {
             for (Cell cell : row) {
                 String propertyValue = cell.getStringCellValue();
                 Element element = (Element) nodes.item(i);
-                String propertyName = element.getAttribute("name");
+                String propertyName = element.getFirstChild().getNodeName();
                 if (propertyName != null) {
                     // T型で定義したエンティティに値を格納したい
                     BeanUtils.copyProperties(entity, propertyName, propertyValue);

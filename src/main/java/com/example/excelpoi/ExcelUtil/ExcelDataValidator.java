@@ -1,9 +1,11 @@
 package com.example.excelpoi.ExcelUtil;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.excelpoi.Controller.FileUploadController.UploadResponse;
 
+@Service
 public class ExcelDataValidator {
     
     /*
