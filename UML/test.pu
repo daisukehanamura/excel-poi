@@ -1,0 +1,29 @@
+@startuml
+hide empty members
+
+class 各画面Controller  {
+    field
+    method()
+}
+
+class 各画面Service  {
+    field
+    Excel読み込み呼び出し()
+    データ型入力チェック呼び出し(Sheet,XML定義体)：Message
+    個別入力チェック(Sheet,XML定義体)：Entity
+}
+
+class 共通Excel入力チェックService  {
+    field
+    データ型入力チェック(Sheet,XML定義体)
+}
+
+class 共通Excel読み込みService  {
+    field
+    Excel読み込み(Sheet,XML定義体)
+}
+
+各画面Controller -- 各画面Service : text
+各画面Service -- 共通Excel入力チェックService : text
+各画面Service -- 共通Excel読み込みService : text
+@enduml
